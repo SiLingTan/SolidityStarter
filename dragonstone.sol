@@ -22,12 +22,12 @@ contract DragonStone {
 
     // Only creator can invoke this function to create currency
     function create(address receiver, uint amount) {
-        if (msg.sender != creator) return;
+        if (msg.sender != creator) throw;
         balances[receiver] += amount;
     }
 
     function transfer(address receiver, uint amount) {
-        if (balances[msg.sender] < amount) return;
+        if (balances[msg.sender] < amount) throw;
         balances[msg.sender] -= amount;
         balances[receiver] += amount;
         // to inform listeners of the successful transfer
